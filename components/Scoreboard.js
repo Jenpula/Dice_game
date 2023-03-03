@@ -45,10 +45,16 @@ const Scoreboard = ( {navigation} ) => {
         <View>
             <Header />
             <Text style={styles.title}>Mini-Yahtzee</Text>
+            <MaterialCommunityIcons
+                name={'account-star'}
+                size={100}
+                style={styles.header_icon}
+                color={'black'}>
+            </MaterialCommunityIcons>
             {scores.length > 0 ? (
                 <View>
                     {scores.map((player, i) => (
-                        <Text key={i}>{i + 1}. {player.name} {player.date} {player.points}</Text>
+                        <Text key={i}>{i + 1}. {player.name} {player.date} {String(player.points)}</Text>
                     ))}
                     <Button title="Clear Scoreboard" onPress={clearScoreboard} />
                 </View>

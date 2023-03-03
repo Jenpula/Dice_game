@@ -151,8 +151,8 @@ const buttonRow = [];
             const playerPoints = {
                 name: playerName,
                 date: new Date().toLocaleString(),
-                points: totalPoints       
-            }
+                points: totalPoints
+            };
             try {
                 const newScore = [...scores, playerPoints];
                 const jsonValue = JSON.stringify(newScore);
@@ -244,6 +244,7 @@ return (
         <Pressable style={styles.button}
             onPress={() => throwDices()}>
             <Text style={styles.buttonText}>
+
                 Throw dices
             </Text>
         </Pressable>
