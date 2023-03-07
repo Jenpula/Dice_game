@@ -52,7 +52,7 @@ export default StyleSheet.create({
     flexDirection: "row"
   },
   button: {
-    margin: 30,
+    margin: 15,
     flexDirection: "row",
     padding: 10,
     backgroundColor: "#8cb7f8",
@@ -82,7 +82,9 @@ export default StyleSheet.create({
     padding: 5
   },
   header_1: {
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: 10,
+    padding: 10
   },
   header_icon: {
     alignItems: 'center',
@@ -93,6 +95,9 @@ export default StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     fontSize: 25
+  },
+  footer_styles: {
+    margin: 100
   }
   
   

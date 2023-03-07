@@ -37,7 +37,7 @@ const Scoreboard = ( {navigation} ) => {
             await AsyncStorage.removeItem(SCOREBOARD_KEY);
             setScores([]);
         } catch (error) {
-            console.log(error.message);
+            console.log("Removing: " + error.message);
         }
     };
    
@@ -54,16 +54,16 @@ const Scoreboard = ( {navigation} ) => {
             {scores.length > 0 ? (
                 <View>
                     {scores.map((player, i) => (
-                        <Text key={i}>{i + 1}. {player.name} {player.date} {String(player.points)}</Text>
+                        <Text style={styles.header_1} key={i}>{i + 1}. {player.name} {player.date} Points: {String(player.points)}</Text>
                     ))}
-                    <Button title="Clear Scoreboard" onPress={clearScoreboard} />
+                    <Button style={styles.button} title="Clear Scoreboard" onPress={clearScoreboard} />
                 </View>
             ) 
             : 
             (
-                <Text style={styles.empty}>Scoreboard is empty</Text>
+                <Text style={styles.bold_header}>Scoreboard is empty</Text>
             )}
-            <Footer />
+            <Footer style={styles.footer_styles} />
         </View>
 
     )
