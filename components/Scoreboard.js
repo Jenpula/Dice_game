@@ -26,7 +26,6 @@ const Scoreboard = ( {navigation} ) => {
                 let tmpScores = JSON.parse(jsonValue);
                 setScores(tmpScores);
                   scores.sort((a, b) => parseFloat(b.points) - parseFloat(a.points));
-                // Sort results here for the rendering sort()
             }
         } catch (error) {
             console.log('Read error' + error.message);

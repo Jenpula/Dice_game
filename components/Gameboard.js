@@ -21,7 +21,7 @@ export default Gameboard = ({route}) => {
     const [diceSpots, setDiceSpots] = useState(new Array(NBR_OF_DICES).fill(0))
     const [dicePointsTotal, setDicePointsTotal] = useState(new Array(MAX_SPOT).fill(0));
     const [sum, setSum] = useState(0);
-    const [bonusPoints, setBonusPoints] = useState(BONUS_POINTS_LIMIT);
+    const [bonusScores, setBonusScores] = useState(BONUS_POINTS_LIMIT);
     const [bonusStatus, setBonusStatus] = useState('');
     const [scores, setScores] = useState([]);
     
@@ -105,13 +105,13 @@ export default Gameboard = ({route}) => {
     }, [sum])
 
     useEffect(() => {
-        if(bonusPoints <= 0) {
+        if(bonusScores <= 0) {
             setBonusStatus("Congrats! Bonuspoints (" + BONUS_POINTS + ") added" );
         }
         else {
-            setBonusStatus("You are " + bonusPoints + " points away from bonus")
+            setBonusStatus("You are " + bonusScores + " points away from bonus")
         }
-    }, [bonusPoints]);
+    }, [bonusScores]);
 
     function getDiceColor(i) {
         return selectedDices[i] ? "black" : '#8cb7f8';
@@ -121,16 +121,18 @@ export default Gameboard = ({route}) => {
         return selectedDicePoints[i] ? "black" : '#8cb7f8';
     }
 
+    function getSpotTotal(i) {
+        return dicePointsTotal[i];
+    }
+    
+
     const selectDice = (i) => {
         let dices = [...selectedDices];
         dices[i] = selectedDices[i] ? false : true;
         setSelectedDices(dices);
     }
 
-    function getSpotTotal(i) {
-        return dicePointsTotal[i];
-    }
-    
+  
     const selectDicePoints = (i) => {
         let selected = [...selectedDices];
         let selectedPoints = [...selectedDicePoints];
@@ -175,34 +177,22 @@ export default Gameboard = ({route}) => {
        
         if(nbrOfThrowsLeft >= 0) {
             setSum(total)
-            checkBonusPoints(total)
+            checkBonusScores(total)
         }
     }
 
-    const checkBonusPoints = (total) => {
+    const checkBonusScores = (total) => {
         const bonus = BONUS_POINTS_LIMIT - total;
 
         if(bonus <= 0) {
-            setBonusPoints(0)
+            setBonusScores(0)
             setSum(total+BONUS_POINTS);
         }
         else if(bonus > 0 ) {
-            setBonusPoints(bonus);
+            setBonusScores(bonus);
         } 
     }
 
-    function resetGame() {
-        setNbrOfThrowsLeft(NBR_OF_THROWS);
-        setStatus('');
-        setSelectedDices(new Array(NBR_OF_DICES).fill(false));
-        setSelectedDicePoints(new Array(MAX_SPOT).fill(false));
-        setDiceSpots(new Array(NBR_OF_DICES).fill(0));
-        setDicePointsTotal(new Array(MAX_SPOT).fill(0));
-        setScores([]);
-        setSum(0);
-        setBonusStatus('');
-    }
-  
     const getScoreBoardData = async () => {
         try {
             const jsonValue = await AsyncStorage.getItem(SCOREBOARD_KEY);
@@ -233,7 +223,18 @@ export default Gameboard = ({route}) => {
         }
     }
 
-    
+    function resetGame() {
+        setNbrOfThrowsLeft(NBR_OF_THROWS);
+        setStatus('');
+        setSelectedDices(new Array(NBR_OF_DICES).fill(false));
+        setSelectedDicePoints(new Array(MAX_SPOT).fill(false));
+        setDiceSpots(new Array(NBR_OF_DICES).fill(0));
+        setDicePointsTotal(new Array(MAX_SPOT).fill(0));
+        setScores([]);
+        setSum(0);
+        setBonusStatus('');
+    }
+  
     return (
         <View style={styles.gameboard}>
             <Header />

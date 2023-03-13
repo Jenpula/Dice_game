@@ -7,7 +7,7 @@ export default Header = () => {
     return (
         <View style={styles.header}>
             <Text style={styles.title}>
-                Mini-yazthee
+                Mini-yahtzee
             </Text>
         </View>
     )
